@@ -10,7 +10,7 @@
     <artifactId>jsonplaceholder-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jsonplaceholder-service</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Spring Boot Service For JSONPlaceholder Client</description>
 
 	<properties>
 		<java.version>1.8</java.version>
