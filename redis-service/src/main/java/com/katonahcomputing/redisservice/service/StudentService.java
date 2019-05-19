@@ -1,54 +1,19 @@
 package com.katonahcomputing.redisservice.service;
 
 import com.katonahcomputing.redisservice.domain.Student;
-import com.katonahcomputing.redisservice.repository.StudentRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class StudentService {
-    Logger logger = LoggerFactory.getLogger(StudentService.class);
+public interface StudentService {
+    void saveAll();
 
-    @Autowired
-    StudentRepository studentRepository;
+    List<Student> findAll();
 
+    void saveStudent(Student data);
 
-    public void saveAll() {
-        Student engStudent = new Student("Eng2015001", "John Doe", Student.Gender.MALE, 1);
-        Student medStudent = new Student("Med2015001", "Gareth Houston", Student.Gender.MALE, 2);
-        studentRepository.save(engStudent);
-        studentRepository.save(medStudent);
-    }
+    Student retrieveStudent(String key);
 
-    public List<Student> findAll() {
-        List<Student> students = new ArrayList<>();
-        studentRepository.findAll().forEach(students::add);
-        return students;
-    }
+    void updateStudent(Student data);
 
-    public void saveStudent(Student data) {
-        Student student = new Student("Eng2015001", "John Doe", Student.Gender.MALE, 1);
-        studentRepository.save(student);
-    }
-
-    public Student retrieveStudent(String key) {
-        Student retrievedStudent = studentRepository.findById(key).get();
-        return retrievedStudent;
-    }
-
-    public void updateStudent(Student data) {
-        Student retrievedStudent = retrieveStudent(data.getId());
-        studentRepository.save(retrievedStudent);
-    }
-
-    public void deleteStudent(String key) {
-        studentRepository.deleteById(key);
-    }
-
-
+    void deleteStudent(String key);
 }

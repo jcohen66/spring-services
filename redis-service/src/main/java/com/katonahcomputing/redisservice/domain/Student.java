@@ -16,6 +16,9 @@ public class Student implements Serializable {
     private Gender gender;
     private int grade;
 
+    public Student() {
+    }
+
     public Student(String id, String name, Gender gender, int grade) {
         this.id = id;
         this.name = name;

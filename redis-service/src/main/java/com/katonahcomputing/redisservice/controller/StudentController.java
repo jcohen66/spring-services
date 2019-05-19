@@ -1,7 +1,7 @@
 package com.katonahcomputing.redisservice.controller;
 
 import com.katonahcomputing.redisservice.domain.Student;
-import com.katonahcomputing.redisservice.service.StudentService;
+import com.katonahcomputing.redisservice.service.StudentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class StudentController {
     Logger logger = LoggerFactory.getLogger(StudentController.class);
 
     @Autowired
-    StudentService studentService;
+    StudentServiceImpl studentService;
 
     @GetMapping("init")
     public void init() {
