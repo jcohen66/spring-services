@@ -35,6 +35,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "USER")
                 .scopes("read", "write")
                 .autoApprove(true)
+                .accessTokenValiditySeconds(15)
+                .refreshTokenValiditySeconds(2000)
                 .secret("{noop}password");
     }
 
