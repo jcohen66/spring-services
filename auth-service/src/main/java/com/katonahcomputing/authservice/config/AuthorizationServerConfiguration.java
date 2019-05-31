@@ -10,7 +10,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * The Authorization Server is the one responsible for verifying
@@ -24,12 +26,20 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Autowired
     @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
+
     @Autowired
     private TokenStore tokenStore;
 
+    DataSource dataSource;
+
+    public AuthorizationServerConfiguration(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
+        // clients.inMemory()
+        clients.jdbc(dataSource)
                 .withClient("client")
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "USER")
@@ -48,7 +58,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
     @Bean
+    //public TokenStore tokenStore() {
+    //    return new InMemoryTokenStore();
+    //}
     public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
+        return new JdbcTokenStore(dataSource);
     }
+
+
 }
