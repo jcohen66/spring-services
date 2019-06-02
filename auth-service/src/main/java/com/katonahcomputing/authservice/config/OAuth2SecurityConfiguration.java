@@ -37,6 +37,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .password("{noop}secret")
                 .roles("ADMIN").build();
         return new InMemoryUserDetailsManager(user, userAdmin);
+        // return new JdbcUserDetailsManager(dataSource);
     }
 
     /*
@@ -51,11 +52,11 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/ index", "/ webpublico").permitAll()
-                .antMatchers("/ webprivado").authenticated()
-                .antMatchers("/ webadmin").hasRole("ADMIN").and()
+                .antMatchers("/", "/api/v1/index", "/api/v1/public").permitAll()
+                .antMatchers("/api/v1/private").authenticated()
+                .antMatchers("/api/v1/admin").hasRole("ADMIN").and()
                 .formLogin()
-                .loginPage("/ login")
+                .loginPage("/api/v1/login")
                 .permitAll()
                 .and()
                 .logout() // Method get then I have disabled CSRF

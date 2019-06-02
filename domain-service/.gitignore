@@ -17,11 +17,13 @@ HELP.md
 *.iml
 *.ipr
 
-# Mac
-.DS_Store
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/build/
 
-# Maven
-log/
-target/
-/domain-service/.mvn/
-/.mvn/
+### VS Code ###
+.vscode/

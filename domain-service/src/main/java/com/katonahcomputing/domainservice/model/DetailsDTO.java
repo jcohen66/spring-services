@@ -1,4 +1,5 @@
-package com.katonahcomputing.authservice.model;
+package com.katonahcomputing.domainservice.model;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
